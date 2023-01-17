@@ -238,7 +238,7 @@ metadata:
   name: spire-server-bundle-endpoint
   namespace: spire-system
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
     - name: api
       port: 8443

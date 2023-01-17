@@ -1,3 +1,8 @@
 resources:
 - greeter-server.yaml
 - greeter-server-service.yaml
+
+images:
+- name: greeter-server:demo
+  newName: dev.registry.tanzu.vmware.com/a-denny-test/greeter-server
+  newTag: demo

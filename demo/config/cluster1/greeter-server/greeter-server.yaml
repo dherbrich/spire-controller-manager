@@ -20,7 +20,7 @@ spec:
       containers:
       - name: greeter-server
         image: greeter-server:demo
-        imagePullPolicy: Never
+        imagePullPolicy: IfNotPresent
         args: ["--addr", ":8443"]
         volumeMounts:
         - name: spire-agent-socket

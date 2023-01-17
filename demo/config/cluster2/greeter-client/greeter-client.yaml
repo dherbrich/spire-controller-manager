@@ -20,7 +20,7 @@ spec:
       containers:
       - name: greeter-client
         image: greeter-client:demo
-        imagePullPolicy: Never
+        imagePullPolicy: IfNotPresent
         volumeMounts:
         - name: spire-agent-socket
           mountPath: /spire-agent-socket

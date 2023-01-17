@@ -1,2 +1,7 @@
 resources:
 - greeter-client.yaml
+
+images:
+- name: greeter-client:demo
+  newName: dev.registry.tanzu.vmware.com/a-denny-test/greeter-client
+  newTag: demo

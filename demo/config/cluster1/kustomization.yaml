@@ -19,3 +19,6 @@ configMapGenerator:
   namespace: spire-system
   files:
   - spire/spire-controller-manager-config.yaml
+
+
+

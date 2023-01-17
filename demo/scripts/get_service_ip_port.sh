@@ -6,6 +6,6 @@ NAMESPACE="$1"
 NAME="$2"
 
 NODEPORT=$(kubectl get "service/$NAME" "-n$NAMESPACE" -o jsonpath='{.spec.ports[0].nodePort}')
-NODEIP=$(kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="InternalIP")].address}')
+NODEIP=$(kubectl get "service/$NAME" "-n$NAMESPACE" -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 
 echo "$NODEIP:$NODEPORT"
