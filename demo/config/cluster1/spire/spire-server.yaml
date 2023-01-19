@@ -187,6 +187,14 @@ spec:
               readOnly: true
             - name: spire-server-socket
               mountPath: /tmp/spire-server/private
+            - name: spire-run
+              readOnly: false
+              mountPath: /run/spire/server/data
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: 
+              - ALL
         - name: spire-controller-manager
           image: ghcr.io/spiffe/spire-controller-manager:nightly
           imagePullPolicy: IfNotPresent
@@ -201,6 +209,11 @@ spec:
             - name: spire-controller-manager-config
               mountPath: /spire-controller-manager-config.yaml
               subPath: spire-controller-manager-config.yaml
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: 
+              - ALL
       volumes:
         - name: spire-config
           configMap:
@@ -210,6 +223,14 @@ spec:
         - name: spire-controller-manager-config
           configMap:
             name: spire-controller-manager-config
+        - name: spire-run
+          emptyDir: {}
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+        runAsNonRoot: true
+        # capabilities:
+        #   drop: ALL
 
 ---
 

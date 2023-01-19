@@ -116,6 +116,13 @@ spec:
               mountPath: /var/run/secrets/tokens
             - name: spire-agent-socket-dir
               mountPath: /run/spire/sockets
+          securityContext:
+            seccompProfile:
+              type: RuntimeDefault
+            privileged: true
+            capabilities:
+              drop: 
+              - ALL
         # This is the container which runs the SPIFFE CSI driver.
         - name: spiffe-csi-driver
           image: ghcr.io/spiffe/spiffe-csi-driver:0.2.0
@@ -146,7 +153,12 @@ spec:
               mountPropagation: Bidirectional
               name: mountpoint-dir
           securityContext:
+            seccompProfile:
+              type: RuntimeDefault
             privileged: true
+            capabilities:
+              drop: 
+              - ALL
         # This container runs the CSI Node Driver Registrar which takes care
         # of all the little details required to register a CSI driver with
         # the kubelet.
@@ -165,6 +177,13 @@ spec:
             # directory
             - name: kubelet-plugin-registration-dir
               mountPath: /registration
+          securityContext:
+            seccompProfile:
+              type: RuntimeDefault
+            privileged: true
+            capabilities:
+              drop: 
+              - ALL
       volumes:
         - name: spire-config
           configMap:

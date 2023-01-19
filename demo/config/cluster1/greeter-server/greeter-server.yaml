@@ -26,10 +26,15 @@ spec:
         - name: spire-agent-socket
           mountPath: /spire-agent-socket
           readOnly: true
+        - name: spire-run
+          readOnly: false
+          mountPath: /run
         env:
         - name: SPIFFE_ENDPOINT_SOCKET
           value: unix:///spire-agent-socket/agent.sock
       volumes:
+      - name: spire-run
+        emptyDir: {}
       - name: spire-agent-socket
         csi:
           driver: "csi.spiffe.io"
